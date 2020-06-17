@@ -11,7 +11,7 @@ public class ClosetGenerator : MonoBehaviour
 
     public Canvas canvas;   // キャンバス
 
-    private int stageNum;   // 選んだステージの番号を格納　例）３×２：0
+    public int stageNum;   // 選んだステージの番号を格納　例）３×２：0
 
     // Start is called before the first frame update
     void Start()
@@ -31,20 +31,18 @@ public class ClosetGenerator : MonoBehaviour
         // ステージ番号記憶
         this.stageNum = stageNum;
 
+        // "Closet"というタグの付いたゲームオブジェクトをすべて削除
+        // List<GameObject> gmObjs = new List<GameObject>();   // 初期化
+        GameObject[] gmObjs;     // 初期化
+        gmObjs = GameObject.FindGameObjectsWithTag("Closet");   // "Closet"というタグのGameObjectを取得
+        for(int i = 0; i < gmObjs.Length; i++)  // 取得されたGameObjectをそれぞれ削除実施
+        {
+            Destroy(gmObjs[i]);  // 削除
+        }
+
         //格納リストリフレッシュ
         closetOpenedList = new List<ClosetOpen>();
-
-        /*
-        for(int i = 0; i < generateNum; i++)
-        {
-            //インスタンシエイト
-            ClosetOpen clst = Instantiate(closetPrefab, closetPositionsList[i]);
-
-            //リストに追加
-            closetOpenedList.Add(clst);
-        }
-        */
-
+        
         // 選択されたステージのデータを取得
         ClosetData dL = closetDataList[this.stageNum];
 
