@@ -20,11 +20,17 @@ public class ClickChecker : MonoBehaviour
             //当たったのが自分自身だったら
             if (hit2d)
             {
-                //たんすをあける
+                // たんすをあける
                 if (hit2d.transform.gameObject.TryGetComponent(out ClosetOpen clstopn))
                 {
-                    //たんすをあける
-                    clstopn.ClosetOpening();
+                    if (!clstopn.IsOpen)
+                    {
+                        // たんすをあける
+                        clstopn.ClosetOpening();
+
+                        // 開いたフラグをONに
+                        clstopn.IsOpen = true;
+                    }
                 }
             }
         }

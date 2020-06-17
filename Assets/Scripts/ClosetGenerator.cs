@@ -7,23 +7,34 @@ public class ClosetGenerator : MonoBehaviour
     public ClosetOpen closetPrefab; //プレハブ
     public int maxClosets;  //生成するクローゼットの数
     public List<Transform> closetPositionsList = new List<Transform>(); //生成するクローゼットの各位置
-    public List<ClosetOpen> closetOpenedList;
+    public List<ClosetOpen> closetOpenedList;   // 生成したクローゼットを格納する箱
+
+    public Canvas canvas;   // キャンバス
+
+    private int stageNum;   // 選んだステージの番号を格納　例）３×２：0
 
     // Start is called before the first frame update
     void Start()
     {
         //クローゼット生成
-        GenerateCloset(maxClosets);
+        // GenerateCloset(maxClosets);
     }
 
     /// <summary>
     /// クローゼット生成
     /// </summary>
-    private void GenerateCloset(int generateNum)
+    public void GenerateCloset(int stageNum)
     {
+        // キャンバスを消す
+        canvas.transform.gameObject.SetActive(false);
+
+        // ステージ番号記憶
+        this.stageNum = stageNum;
+
         //格納リストリフレッシュ
         closetOpenedList = new List<ClosetOpen>();
 
+        /*
         for(int i = 0; i < generateNum; i++)
         {
             //インスタンシエイト
@@ -31,6 +42,28 @@ public class ClosetGenerator : MonoBehaviour
 
             //リストに追加
             closetOpenedList.Add(clst);
+        }
+        */
+
+        // 選択されたステージのデータを取得
+        ClosetData dL = closetDataList[this.stageNum];
+
+        for (int j = 0; j < dL.column; j++)
+        {
+            for (int i = 0; i < dL.row; i++)
+            {
+                // インスタンシエイト
+                ClosetOpen clst
+                    = Instantiate(closetPrefab
+                                , new Vector3(dL.startPos.x + j * (dL.columnPitch), dL.startPos.y + i * (dL.rowPitch), 0)
+                                , Quaternion.identity);
+
+                // スケール変更
+                clst.transform.localScale = new Vector3(dL.scale, dL.scale, dL.scale);
+
+                // リストに追加
+                closetOpenedList.Add(clst);
+            }
         }
 
         //抽選
@@ -48,5 +81,27 @@ public class ClosetGenerator : MonoBehaviour
         //付与
         closetOpenedList[index].win = true;
     }
+
+    /// <summary>
+    /// ステージのデータ管理クラス
+    /// </summary>
+    [System.Serializable]   // ←属性情報（こうすることでインスペクター上で表示される）
+    public class ClosetData
+    {
+        // クローゼットの行列数
+        public int row; // クローゼットプレハブを並べる行
+        public int column;  // クローゼットプレハブを並べる列
+
+        // 位置情報
+        public Vector2 startPos;
+
+        // クローゼットの間隔
+        public float rowPitch;  // 行間隔
+        public float columnPitch;   // 列間隔
+
+        // スケール
+        public float scale; // スケール
+    }
+    public List<ClosetData> closetDataList; // ClosetDataクラスのリスト（３×２, ４×３, ５×４のステージ情報を格納）
 
 }
