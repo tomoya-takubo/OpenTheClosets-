@@ -13,6 +13,8 @@ public class ClosetGenerator : MonoBehaviour
 
     public int stageNum;   // 選んだステージの番号を格納　例）３×２：0
 
+    public GameObject titles;   // titleとボタンのUI
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,12 +27,16 @@ public class ClosetGenerator : MonoBehaviour
     /// </summary>
     public void GenerateCloset(int stageNum)
     {
-        // キャンバスを消す
-        canvas.transform.gameObject.SetActive(false);
+        // キャンバスを消す（廃止予定）
+        // canvas.transform.gameObject.SetActive(false);
+
+        // タイトルとボタンを消す
+        titles.SetActive(false);
 
         // ステージ番号記憶
         this.stageNum = stageNum;
 
+        // 新しいクローゼットを生成する前に直前のクローゼットをすべて削除します
         // "Closet"というタグの付いたゲームオブジェクトをすべて削除
         // List<GameObject> gmObjs = new List<GameObject>();   // 初期化
         GameObject[] gmObjs;     // 初期化
@@ -75,6 +81,7 @@ public class ClosetGenerator : MonoBehaviour
     {
         //(index)番目が当たり
         int index = Random.Range(0, closetOpenedList.Count);    //0～closetOpendList.Count-1までを抽選
+        Debug.Log((index + 1) + "番目に当たりが入っています！");
 
         //付与
         closetOpenedList[index].win = true;
