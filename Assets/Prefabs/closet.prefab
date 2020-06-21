@@ -80,6 +80,10 @@ MonoBehaviour:
   win: 0
   loseSE: {fileID: 8300000, guid: f02f0ff9fe3d1cd429f187a5f6750f22, type: 3}
   winSE: {fileID: 8300000, guid: 174fd6ec98b02bd42852714c9a110d57, type: 3}
+  waitTime: 1.5
+  closetGenerator: {fileID: 0}
+  stageNum: 0
+  isWait: 0
 --- !u!82 &1145003027975007294
 AudioSource:
   m_ObjectHideFlags: 0

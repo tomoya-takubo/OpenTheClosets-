@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            // フレームの差分だけ減らして更新
+            // フレームの差分だけ時間を減らして更新
             limitTime -= Time.deltaTime;
         }
 
