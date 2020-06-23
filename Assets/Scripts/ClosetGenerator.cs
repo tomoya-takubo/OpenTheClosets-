@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class ClosetGenerator : MonoBehaviour
 {
+    [Header("【ヒエラルキー】")]  // ←　インスペクター上で題目として表示（ヒエラルキー上にあるGameObjectを参照しているということがわかるように）
+    public UIManager uiManager; // UIManager
+    // public Canvas canvas;   // キャンバス
+
+    [Header("【変数】")]
     public ClosetOpen closetPrefab; // プレハブ
     public int maxClosets;  // 生成するクローゼットの数
     // public List<Transform> closetPositionsList = new List<Transform>(); // （廃止）生成するクローゼットの各位置
     public List<ClosetOpen> closetOpenedList;   // 生成したクローゼットを格納する箱
 
-    public Canvas canvas;   // キャンバス
 
     public int stageNum;   // 選んだステージの番号を格納　例）３×２：0
 
@@ -93,6 +97,15 @@ public class ClosetGenerator : MonoBehaviour
 
         // 抽選
         ChooseWin();
+
+        // UI呼び出し
+        if (uiManager.gameStates == UIManager.GAME_STATES.OPENING) // 初回であれば
+        {
+            // StartGameメソッド
+            uiManager.StartGame();
+            // Debug.Log("GameStartメソッドが呼ばれました");
+        }
+
     }
 
     /// <summary>
