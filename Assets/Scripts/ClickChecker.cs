@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class ClickChecker : MonoBehaviour
 {
+    [Header("【ヒエラルキー】")]
     // public GameMaster gM;   // ゲームマネージャー
     public ClosetGenerator closetGenerator;   // たんすジェネレーター
     // public float waitTime;  // ウェイト時間
+    public UIManager uiManager; // UIマネージャー
 
     // Update is called once per frame
     void Update()
     {
         // （☆）【小技】returnの壁を作って後ろの処理をさせない
-        if(closetGenerator.isWait)
+        if(closetGenerator.isWait || uiManager.gameStates != UIManager.GAME_STATES.PLAYING)
         {
             return;
         }

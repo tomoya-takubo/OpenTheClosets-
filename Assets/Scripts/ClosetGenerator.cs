@@ -12,14 +12,14 @@ public class ClosetGenerator : MonoBehaviour
     public ClosetOpen closetPrefab; // プレハブ
     public int maxClosets;  // 生成するクローゼットの数
     // public List<Transform> closetPositionsList = new List<Transform>(); // （廃止）生成するクローゼットの各位置
-    public List<ClosetOpen> closetOpenedList;   // 生成したクローゼットを格納する箱
+    public List<ClosetOpen> closetList;   // 生成したクローゼットを格納する箱
 
 
     public int stageNum;   // 選んだステージの番号を格納　例）３×２：0
 
     public GameObject titles;   // titleとボタンのUI
 
-    public bool isWait = false;  // ウェイトフラグ
+    public bool isWait = false;  // ウェイトフラグ（宝船を引き当てる～次のクローゼットセットまでの待ち時間）
 
     public float waitTime;  // ウェイトタイム
 
@@ -47,26 +47,8 @@ public class ClosetGenerator : MonoBehaviour
         // ステージ番号記憶
         this.stageNum = stageNum;
 
-        // （）新しいクローゼットを生成する前に直前のクローゼットをすべて削除します
-        // "Closet"というタグの付いたゲームオブジェクトをすべて削除
-        // List<GameObject> gmObjs = new List<GameObject>();   // 初期化
-        // GameObject[] gmObjs;     // 削除オブジェクト格納用配列
-        // gmObjs = GameObject.FindGameObjectsWithTag("Closet");   // "Closet"というタグのGameObjectを取得
-        // for(int i = 0; i < gmObjs.Length; i++)  // 取得されたGameObjectをそれぞれ削除実施
-        // {
-        //     Destroy(gmObjs[i]);  // 削除
-        // }
-
-        // closetOpenedListに含まれるGameObjectをすべて削除する
-        // （２回目以降のクローゼット生成の直前で効果発揮）
-        for (int i = 0; i < closetOpenedList.Count; i++)
-        {
-            // 削除
-            Destroy(closetOpenedList[i].gameObject);
-        }
-
-        // 格納リストリフレッシュ
-        closetOpenedList = new List<ClosetOpen>();
+        // クローゼットリスト初期化
+        CleanClosetList();
         
         // 選択されたステージのデータを取得
         ClosetData dL = closetDataList[this.stageNum];
@@ -91,7 +73,7 @@ public class ClosetGenerator : MonoBehaviour
                 clst.SetUp(this, this.stageNum, this.waitTime);
 
                 // リストに追加
-                closetOpenedList.Add(clst);
+                closetList.Add(clst);
             }
         }
 
@@ -114,11 +96,11 @@ public class ClosetGenerator : MonoBehaviour
     void ChooseWin()
     {
         // (index)番目が当たり
-        int index = Random.Range(0, closetOpenedList.Count);    // 0～closetOpendList.Count-1までを抽選
-        Debug.Log((index + 1) + "番目に当たりが入っています！");
+        int index = Random.Range(0, closetList.Count);    // 0～closetOpendList.Count-1までを抽選
+        // Debug.Log((index + 1) + "番目に当たりが入っています！");
 
         // 付与
-        closetOpenedList[index].win = true;
+        closetList[index].win = true;
     }
 
     /// <summary>
@@ -142,5 +124,32 @@ public class ClosetGenerator : MonoBehaviour
         public float scale; // スケール
     }
     public List<ClosetData> closetDataList; // ClosetDataクラスのリスト（３×２, ４×３, ５×４のステージ情報を格納）
+
+    /// <summary>
+    /// 院スタン市営としたクローゼットの管理リストを初期化する
+    /// </summary>
+    public void CleanClosetList()
+    {
+        // （★）新しいクローゼットを生成する前に直前のクローゼットをすべて削除します
+        // "Closet"というタグの付いたゲームオブジェクトをすべて削除
+        // List<GameObject> gmObjs = new List<GameObject>();   // 初期化
+        // GameObject[] gmObjs;     // 削除オブジェクト格納用配列
+        // gmObjs = GameObject.FindGameObjectsWithTag("Closet");   // "Closet"というタグのGameObjectを取得
+        // for(int i = 0; i < gmObjs.Length; i++)  // 取得されたGameObjectをそれぞれ削除実施
+        // {
+        //     Destroy(gmObjs[i]);  // 削除
+        // }
+
+        // closetOpenedListに含まれるGameObjectをすべて削除する
+        // （２回目以降のクローゼット生成の直前で効果発揮）
+        for (int i = 0; i < closetList.Count; i++)
+        {
+            // 削除
+            Destroy(closetList[i].gameObject);
+        }
+
+        // 格納リストリフレッシュ
+        closetList = new List<ClosetOpen>();
+    }
 
 }
