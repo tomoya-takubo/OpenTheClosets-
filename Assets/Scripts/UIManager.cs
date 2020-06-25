@@ -73,6 +73,8 @@ public class UIManager : MonoBehaviour
             // 文字を一文字ずつ、一定の時間間隔で出力
             StartCoroutine(TextUpdate());
 
+            // 
+
             Debug.Log("TextUpdateメソッドが呼ばれました");
 
             return;

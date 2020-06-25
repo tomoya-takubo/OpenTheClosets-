@@ -106,7 +106,7 @@ public class ClosetGenerator : MonoBehaviour
     /// <summary>
     /// ステージのデータ管理クラス
     /// </summary>
-    [System.Serializable]   // ←属性情報（こうすることでインスペクター上で表示される）
+    [System.Serializable]   // ←（★）属性情報（こうすることでインスペクター上で表示される）
     public class ClosetData
     {
         // クローゼットの行列数
@@ -126,7 +126,7 @@ public class ClosetGenerator : MonoBehaviour
     public List<ClosetData> closetDataList; // ClosetDataクラスのリスト（３×２, ４×３, ５×４のステージ情報を格納）
 
     /// <summary>
-    /// 院スタン市営としたクローゼットの管理リストを初期化する
+    /// インスタンシエイトしたクローゼットの管理リストを初期化する
     /// </summary>
     public void CleanClosetList()
     {
