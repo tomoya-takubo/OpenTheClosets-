@@ -838,15 +838,15 @@ MonoBehaviour:
   closetDataList:
   - row: 3
     column: 2
-    startPos: {x: -1.3, y: 2.7}
+    startPos: {x: -1.2, y: 2.7}
     rowPitch: -2.7
-    columnPitch: 2.6
+    columnPitch: 2.4
     scale: 0.66
   - row: 4
     column: 3
-    startPos: {x: -1.7, y: 3}
+    startPos: {x: -1.6, y: 3}
     rowPitch: -2
-    columnPitch: 1.7
+    columnPitch: 1.6
     scale: 0.45
   - row: 5
     column: 4
@@ -904,15 +904,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 1118745746}
-  treasureShipCounter: {fileID: 230955613}
+  treasureShipCounterObj: {fileID: 230955613}
   gameOverPanel: {fileID: 1319290962}
   gameOverText: {fileID: 1423936699}
   RestartButton: {fileID: 318385010}
   closetGenerator: {fileID: 861274857}
   titleWithButtons: {fileID: 104666805}
-  limitTimeMax: 60
+  limitTimeMax: 20
   treasureShipCounterText: {fileID: 1130318124}
-  tresureShipCounter: 0
+  treasureShipCounter: 0
   gameStates: 0
   limitTime: 0
 --- !u!4 &887575443
@@ -1164,9 +1164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClipList:
-  - {fileID: 8300000, guid: 236024c8d0089c045bbb953a67c34248, type: 3}
   - {fileID: 8300000, guid: 89cf2d6de49ec144aa7defb93190ef83, type: 3}
-  - {fileID: 0}
 --- !u!82 &1089425871
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1177,11 +1175,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 236024c8d0089c045bbb953a67c34248, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

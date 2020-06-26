@@ -35,6 +35,7 @@ public class ClosetGenerator : MonoBehaviour
     /// </summary>
     public void GenerateCloset(int stageNum)
     {
+        // 
         // キャンバスを消す（廃止予定）
         // canvas.transform.gameObject.SetActive(false);
 
@@ -97,7 +98,7 @@ public class ClosetGenerator : MonoBehaviour
     {
         // (index)番目が当たり
         int index = Random.Range(0, closetList.Count);    // 0～closetOpendList.Count-1までを抽選
-        // Debug.Log((index + 1) + "番目に当たりが入っています！");
+        Debug.Log((index + 1) + "番目に当たりが入っています！");
 
         // 付与
         closetList[index].win = true;

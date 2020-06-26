@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 {
     [Header("【ヒエラルキー】")]
     public Text timeText;  // 制限時間を表示するテキスト
-    public GameObject treasureShipCounter;  // 宝船カウンター表示
+    public GameObject treasureShipCounterObj;  // 宝船カウンター表示
     public GameObject gameOverPanel;    // 終了パネル表示　←（☆）パネルを画面手前に出現させることで
                                         //                          プレイヤーがそれ以上クローゼットに触れなく
                                         //                          できるようにもさせることができる
@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     public float limitTimeMax; // 最大制限時間（←　（★）この変数は更新しない）
 
     public Text treasureShipCounterText;    // 宝船カウンターのテキスト
-    public int tresureShipCounter;  // 手に入れた宝船の格納
+    public int treasureShipCounter;  // 手に入れた宝船の格納
 
     // public bool isSetUp = false;  // ゲーム開始可能フラグ
 
@@ -90,11 +90,11 @@ public class UIManager : MonoBehaviour
     public void GetTresureShip()
     {
         // カウンターを１増やす
-        tresureShipCounter++;
+        treasureShipCounter++;
 
         // テキスト更新
         this.treasureShipCounterText.text
-             = "×　" + tresureShipCounter;
+             = "×　" + treasureShipCounter;
     }
 
     /// <summary>
@@ -131,7 +131,7 @@ public class UIManager : MonoBehaviour
         // タイムカウンターUIを表示
         timeText.enabled = true;
         // 宝船カウンターUIを表示
-        treasureShipCounter.SetActive(true);
+        treasureShipCounterObj.SetActive(true);
         // ゲーム開始可能フラグをtrueに
         // isSetUp = true;
         // ゲームステータスをPLAYINGに
@@ -160,13 +160,20 @@ public class UIManager : MonoBehaviour
         gameOverPanel.SetActive(false);
 
         // タイムカウンター非表示
-        timeText.gameObject.SetActive(false);
+        // timeText.gameObject.SetActive(false);
+        timeText.enabled = false;
 
         // 宝船カウンター非表示
-        treasureShipCounter.SetActive(false);
+        treasureShipCounterObj.SetActive(false);
 
         // タイトルとボタン表示
         titleWithButtons.SetActive(true);
+
+        // 宝船カウンター初期化
+        treasureShipCounter = 0;
+
+        // 宝船獲得数表示テキスト初期化
+        treasureShipCounterText.text = "×　0";
 
     }
 

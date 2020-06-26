@@ -16,7 +16,7 @@ public class BGM : MonoBehaviour
     void Start()
     {
         // BGMを流す
-        this.GetComponent<AudioSource>().PlayOneShot(audioClipList[(int)BGMLists.BGM]);
+        // this.GetComponent<AudioSource>().PlayOneShot(audioClipList[(int)BGMLists.BGM]);
     }
 
     // Update is called once per frame

@@ -6,6 +6,7 @@ public class ClosetOpen : MonoBehaviour
 {
     // public GameMaster gM;   // ゲームマスター
 
+    // public UIManager uiManager; //UIマネージャー
     public SpriteRenderer closedCloset; // 閉じたクローゼット
     public SpriteRenderer opendCloset;  // 開いたクローゼット
     public SpriteRenderer tressureShip; // 宝船
@@ -70,12 +71,19 @@ public class ClosetOpen : MonoBehaviour
             // 時間を少し止める
             yield return new WaitForSeconds(waitTime);
 
-            // 再度初期クローゼットを生成
-            closetGenerator.GenerateCloset(this.stageNum);
-
             // ウェイトをOFFに
             // this.isWait = false;
             closetGenerator.isWait = false;
+
+            // ゲームが終わっていれば後続は実施しない
+            // if(uiManager.gameStates == UIManager.GAME_STATES.ENDING)
+            if(uiObj.GetComponent<UIManager>().gameStates == UIManager.GAME_STATES.ENDING)
+            {
+                yield break;
+            }
+
+            // 再度初期クローゼットを生成
+            closetGenerator.GenerateCloset(this.stageNum);
 
         }
         // はずれなら
