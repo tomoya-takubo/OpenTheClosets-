@@ -440,7 +440,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1000, y: 900}
-  m_SizeDelta: {x: 300, y: 300}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &418492552
 MonoBehaviour:
@@ -454,12 +454,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d3b8b9873419f488a459f542860fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posXInitial: 1000
-  posYInitial: 900
+  posXInitial: 800
+  posYInitial: 800
   moveXAbs: 5
   moveX: 0
   treasureShipDirection: 0
   timeCntr: 0
+  sin: 0
+  treasureShipVibration: 5
 --- !u!114 &418492553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,7 +534,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -515}
+  m_AnchoredPosition: {x: 0, y: -498}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &420981329
@@ -844,9 +846,9 @@ MonoBehaviour:
     scale: 0.66
   - row: 4
     column: 3
-    startPos: {x: -1.6, y: 3}
+    startPos: {x: -1.55, y: 3}
     rowPitch: -2
-    columnPitch: 1.6
+    columnPitch: 1.55
     scale: 0.45
   - row: 5
     column: 4
@@ -856,9 +858,9 @@ MonoBehaviour:
     scale: 0.35
   - row: 6
     column: 5
-    startPos: {x: -2, y: 3}
+    startPos: {x: -1.95, y: 3}
     rowPitch: -1.2
-    columnPitch: 1
+    columnPitch: 0.975
     scale: 0.28
 --- !u!4 &861274858
 Transform:
@@ -910,11 +912,14 @@ MonoBehaviour:
   RestartButton: {fileID: 318385010}
   closetGenerator: {fileID: 861274857}
   titleWithButtons: {fileID: 104666805}
-  limitTimeMax: 20
+  audioSource: {fileID: 1021269739}
+  treasureShipImage: {fileID: 418492553}
+  limitTimeMax: 3
   treasureShipCounterText: {fileID: 1130318124}
   treasureShipCounter: 0
   gameStates: 0
   limitTime: 0
+  bgm: {fileID: 1089425871}
 --- !u!4 &887575443
 Transform:
   m_ObjectHideFlags: 0
@@ -1177,7 +1182,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 236024c8d0089c045bbb953a67c34248, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1889,7 +1894,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -183}
+  m_AnchoredPosition: {x: 0, y: -166}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1437871351
@@ -2030,7 +2035,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -9}
+  m_AnchoredPosition: {x: 0, y: 8}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1508214843
@@ -2235,7 +2240,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 473}
+  m_AnchoredPosition: {x: 0, y: 353}
   m_SizeDelta: {x: 1102.9, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1683468460
@@ -2258,7 +2263,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 35419de5c06226045b2e7d919cd6fda4, type: 3}
-    m_FontSize: 200
+    m_FontSize: 180
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -2416,7 +2421,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -351}
+  m_AnchoredPosition: {x: 0, y: -334}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2076059659

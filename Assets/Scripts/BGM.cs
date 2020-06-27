@@ -8,7 +8,7 @@ public class BGM : MonoBehaviour
 
     enum BGMLists
     {
-        BGM,
+        // BGM,
         WHISTLE
     }
 

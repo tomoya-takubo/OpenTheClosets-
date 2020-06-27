@@ -17,6 +17,10 @@ public class TreasureShipImageBehavor : MonoBehaviour
 
     public float timeCntr;  // 時間経過管理変数
 
+    public float sin;   // sinの値
+
+    public float treasureShipVibration; // 船の振動大きさ
+
     private RectTransform rectTF;   // ImageのRectTransform
     // private float moveX;    // 移動量管理変数
     private float goalX;    // X座標目標値管理変数
@@ -44,6 +48,7 @@ public class TreasureShipImageBehavor : MonoBehaviour
     {
         // 時間更新
         timeCntr += Time.deltaTime;
+        sin = (float)Math.Sin(10 * timeCntr) + 1;
 
         if (treasureShipDirection == 1)  // 左向き
         {
@@ -72,9 +77,13 @@ public class TreasureShipImageBehavor : MonoBehaviour
                 // 回転
                 // rectTF.localRotation = new Vector3(0, 0, (float)(45 * (Math.Sin(timeCntr) + 1)));
                 // rectTF.localRotation = new Quaternion(rectTF.localRotation.x
-                //                                        , rectTF.localRotation.y
-                //                                        , (float)(45 * (Math.Sin(10 * timeCntr) + 1))
-                //                                        , rectTF.localRotation.w);
+                //                                         , rectTF.localRotation.y
+                //                                         // , (float)(45 * (Math.Sin(0.01f * timeCntr) + 1))
+                //                                         , (float)(45 * sin)
+                //                                         , rectTF.localRotation.w);
+
+                // 回転
+                rectTF.localRotation = Quaternion.Euler(0, 0, ((-1) * treasureShipVibration * sin));  // （★）Eulerメソッドを使用
             }
         }  
         else if (treasureShipDirection == -1)    // 右向き
@@ -100,6 +109,9 @@ public class TreasureShipImageBehavor : MonoBehaviour
             {
                 // 移動
                 rectTF.localPosition = new Vector2(rectTF.localPosition.x - moveX, rectTF.localPosition.y);
+
+                // 揺れ
+                rectTF.localRotation = Quaternion.Euler(0, 0, (treasureShipVibration * sin));
             }
 
         }

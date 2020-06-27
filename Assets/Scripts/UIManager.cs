@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     public GameObject RestartButton;        // ゲーム再開ボタン
     public ClosetGenerator closetGenerator; // ClosetGeneratorクラス
     public GameObject titleWithButtons;     // タイトルとボタン
+    public AudioSource audioSource; // AudioSource
+    public Image treasureShipImage; // 宝船イメージ画像
 
     [Header("【その他】")]
     public float limitTimeMax; // 最大制限時間（←　（★）この変数は更新しない）
@@ -28,6 +30,9 @@ public class UIManager : MonoBehaviour
 
     // private float limitTime;    // 
     public float limitTime;    // 制限時間管理変数
+
+    // BGM
+    public AudioSource bgm;
 
     // ゲーム遷移状態列挙
     public enum GAME_STATES
@@ -63,6 +68,15 @@ public class UIManager : MonoBehaviour
             {
                 return;
             }
+
+            // BGMを止める
+            // bgm.Pause();
+            bgm.Stop();
+
+            // ホイッスル音を一回
+            // bgm.PlayOneShot(bgm.GetComponent<BGM>().audioClipList[0]);
+            audioSource.PlayOneShot(bgm.GetComponent<BGM>().audioClipList[0]);
+
 
             // パネル表示
             gameOverPanel.SetActive(true);  // パネル表示
@@ -175,6 +189,14 @@ public class UIManager : MonoBehaviour
         // 宝船獲得数表示テキスト初期化
         treasureShipCounterText.text = "×　0";
 
+        // BGM再開
+        // bgm.UnPause();
+        bgm.Play();
+
+        // タイトル画面の船の位置を初期化
+        treasureShipImage.rectTransform.localPosition
+            = new Vector2(treasureShipImage.GetComponent<TreasureShipImageBehavor>().posXInitial
+                        , treasureShipImage.GetComponent<TreasureShipImageBehavor>().posYInitial);
     }
 
     /// <summary>
