@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Coffee.UIExtensions;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +29,16 @@ public class ClosetOpen : MonoBehaviour
     public int stageNum;    // ステージ
 
     // public bool isWait; // ウェイトフラグ（←　ミス、これは値型）
+
+    public SpriteMask closetOpenSpriteMask; // クローゼットマスク
+
+    // public SpriteRenderer blackMask;    // 黒マスク
+    private SpriteRenderer blackMask;    // 黒マスク
+
+    // public ShinyEffectForUGUI shinyEffectForUGUI;   // キラキラのエフェクト
+
+    public SpriteRenderer kirakira; // キラキラエフェクトのマスク
+    public SpriteMask kirakiraMask; // キラキラエフェクトのマスク
 
     private bool isOpen = false;    // 開いているか（デフォルトは閉じている）
 
@@ -68,6 +79,17 @@ public class ClosetOpen : MonoBehaviour
             GameObject uiObj = GameObject.Find("UIManager");    // ヒエラルキー内で「UIManager」と名前の一致するものを取得
             uiObj.GetComponent<UIManager>().GetTresureShip();   // GetTreasureメソッド
 
+            // キラキラ表示
+            kirakira.enabled = true;
+
+            // マスキングをオンに
+            blackMask
+                = GameObject.FindGameObjectWithTag("Mask").GetComponent<SpriteRenderer>();    // SpriteRenderer取得
+            
+            Masking(true);  // マスキングをONに
+
+            // shinyEffectForUGUI.Play();  // キラキラエフェクトをONに
+
             // 時間を少し止める
             yield return new WaitForSeconds(waitTime);
 
@@ -75,9 +97,12 @@ public class ClosetOpen : MonoBehaviour
             // this.isWait = false;
             closetGenerator.isWait = false;
 
+            // マスキングをオフに
+            Masking(false);
+
             // ゲームが終わっていれば後続は実施しない
             // if(uiManager.gameStates == UIManager.GAME_STATES.ENDING)
-            if(uiObj.GetComponent<UIManager>().gameStates == UIManager.GAME_STATES.ENDING)
+            if (uiObj.GetComponent<UIManager>().gameStates == UIManager.GAME_STATES.ENDING)
             {
                 yield break;
             }
@@ -105,5 +130,18 @@ public class ClosetOpen : MonoBehaviour
         this.stageNum = stageNum;   // ステージ格納
         this.waitTime = waitTime;   // ウェイトタイム
         // this.isWait = isWait;   // ウェイトフラグ
+    }
+
+    /// <summary>
+    /// マスキング（黒）の処理
+    /// </summary>
+    private void Masking(bool isMasking)
+    {
+        // 引数に応してマスキングを発生/削除
+        blackMask.enabled = isMasking;
+
+        // 当たりのクローゼットだけくりぬく
+        closetOpenSpriteMask.enabled = isMasking;   // クローゼット
+        kirakiraMask.enabled = isMasking;   // キラキラ
     }
 }
